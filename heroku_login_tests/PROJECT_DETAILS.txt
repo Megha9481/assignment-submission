@@ -1,0 +1,49 @@
+================================================================================
+Heroku Login Tests — Java + Selenium (Page Object Model)
+================================================================================
+Location: ~/Desktop/heroku_login_tests
+
+Purpose
+-------
+Automated tests for https://the-internet.herokuapp.com/login using Selenium 4
+and the Page Object Model, equivalent to the Python POM assignment (Task 3.2).
+
+Project layout (maps to Python assignment)
+------------------------------------------
+  pom.xml                          — Dependencies (like requirements.txt)
+  src/main/java/com/heroku/pages/
+    LoginPage.java                 — Login page POM (URL, locators, fluent API)
+    SecureAreaPage.java            — Post-login /secure page POM
+  src/test/java/com/heroku/tests/
+    BaseTest.java                  — WebDriver setup/teardown (like conftest.py)
+    LoginTest.java                 — Test suite
+  .github/workflows/ci.yml        — Optional CI (headless Chrome)
+
+Page objects — LoginPage
+------------------------
+  URL:              https://the-internet.herokuapp.com/login
+  USERNAME_FIELD:   By.id("username")
+  PASSWORD_FIELD:   By.id("password")
+  LOGIN_BUTTON:     By.cssSelector("button[type=\"submit\"]")
+  FLASH_MESSAGE:    By.id("flash")
+  Methods: open(), enterUsername(), enterPassword(), clickLogin(),
+           getFlashMessage(), login() — all chain where noted (fluent).
+
+Credentials (demo site)
+-----------------------
+  Valid:   tomsmith / SuperSecretPassword!
+
+How to run locally
+------------------
+  Prerequisites: JDK 17+, Maven 3.9+, Google Chrome installed (Selenium Manager
+  resolves chromedriver).
+
+  cd ~/Desktop/heroku_login_tests
+  mvn test
+
+  Headless (optional):
+    HEADLESS=true mvn test
+  or:
+    mvn test -Dheadless=true
+
+================================================================================
